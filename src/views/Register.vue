@@ -23,8 +23,6 @@
 </template>
 
 <script>
-  /* eslint-disable arrow-parens,no-console */
-
   export default {
     data() {
       return {
@@ -38,7 +36,7 @@
     },
     methods: {
       register() {
-        this.$validator.validate().then(isValid => {
+        this.$validator.validate().then((isValid) => {
           console.log(this.regForm);
           if (isValid) {
             this.$store.dispatch('register', this.regForm).then(() => {

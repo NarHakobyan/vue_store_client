@@ -1,9 +1,11 @@
 <template>
   <div class="login-page">
     <div class="form">
-      <form @submit.prevent="login({ email, password })">
-        <input type="text" v-model="email" placeholder="email"/>
-        <input type="password" v-model="password" placeholder="password"/>
+      <form @submit.prevent="login()">
+        <span class="text-danger" v-if="errors.firstByRule('email', 'required')">Email is required</span>
+        <input type="text" v-model="loginForm.email" v-validate="'required'" placeholder="email" name="email"/>
+        <span class="text-danger" v-if="errors.firstByRule('password', 'required')">Password is required</span>
+        <input type="password" v-model="loginForm.password" v-validate="'required'" placeholder="password" name="password"/>
         <button>login</button>
         <p class="message">Not registered?
           <router-link to="/register">Create an account</router-link>
@@ -18,19 +20,27 @@
   export default {
     data() {
       return {
-        email: '',
-        password: '',
+        loginForm: {
+          email: '',
+          password: '',
+
+        },
       };
     },
     methods: {
       login() {
-        this.$store.dispatch('login', {
-          email: this.email,
-          password: this.password,
-        }).then(() => {
-          this.$router.push('/');
+        this.$validator.validate().then((isValid) => {
+          console.log(this.loginForm);
+          if (isValid) {
+            this.$store.dispatch('login', this.loginForm).then(() => {
+              this.$router.push('/');
+            });
+          }
         });
       },
+    },
+    beforeCreate() {
+      this.$store.dispatch('logout');
     },
   };
 </script>
