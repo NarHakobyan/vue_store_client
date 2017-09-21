@@ -1,0 +1,4 @@
+export const PENDING_START = 'PENDING_START';
+export const PENDING_END = 'PENDING_END';
+export const PENDING_SUCCESS = 'PENDING_SUCCESS';
+export const PENDING_ERROR = 'PENDING_ERROR';
