@@ -5,26 +5,29 @@ import { PENDING_ERROR, PENDING_START, PENDING_SUCCESS } from '@/store/types/pen
 
 const defaultState = {
   pending: false,
-  error: null,
+  errors: null,
   isLoggedIn: !!localStorage.getItem('token'),
 };
 
 const mutations = {
   [PENDING_START](state) {
     state.pending = true;
+    state.errors = null;
   },
   [PENDING_SUCCESS](state) {
     state.pending = false;
-    state.error = null;
+    state.errors = null;
   },
-  [PENDING_ERROR](state, error) {
-    state.error = error;
+  [PENDING_ERROR](state, errors) {
+    state.errors = errors;
   },
 };
 
 const actions = {
 };
 const getters = {
+  hasError: state => state.errors !== null,
+  pendingErrors: state => state.errors && state.errors.map(error => error.message).join(',\n'),
 };
 
 const store = new Vuex.Store({

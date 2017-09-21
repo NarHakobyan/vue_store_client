@@ -1,5 +1,5 @@
 import router from '@/router';
-import { PENDING_ERROR, PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
+import { PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
 import User from '@/resources/User';
 
 import { LOGIN_SUCCESS, LOGOUT } from './types/auth.types';
@@ -35,17 +35,12 @@ const actions = {
     localStorage.removeItem('token');
     commit(LOGOUT);
     router.push('/login');
-    // dispatch('router/ROUTE_CHANGED', { path: '/' });
   },
   register({ commit }, creds) {
-    console.log(creds);
-    commit(PENDING_START); // show spinner
+    commit(PENDING_START);
     return User.save(creds).then((...args) => {
       commit(PENDING_SUCCESS);
       return Promise.resolve(...args);
-    }).catch((...args) => {
-      commit(PENDING_ERROR, args[0]);
-      return Promise.reject(...args);
     });
   },
 };

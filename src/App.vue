@@ -1,13 +1,11 @@
 <template>
   <div class="p-0 m-0">
     <div class="d-flex justify-content-center">
-    <b-alert class="global-alert" variant="danger"
-             dismissible
-             :show="showDismissibleAlert"
-             @dismissed="showDismissibleAlert=false">
-      Dismissible Alert!
-    </b-alert>
-  </div>
+      <b-alert class="global-alert" variant="danger"
+               :show="hasError">
+        {{pendingErrors}}
+      </b-alert>
+    </div>
     <app-header></app-header>
     <div class="container-fluid align-items-center justify-content-center d-flex">
 
@@ -18,6 +16,7 @@
 
 <script>
   import appHeader from '@/views/layouts/Header';
+  import { mapGetters } from 'vuex';
   import { bAlert } from 'bootstrap-vue/lib/components';
 
   export default {
@@ -30,8 +29,11 @@
       appHeader,
       bAlert,
     },
-    methods: {
-
+    computed: {
+      ...mapGetters([
+        'hasError',
+        'pendingErrors',
+      ]),
     },
   };
 </script>
@@ -43,7 +45,7 @@
     background-color: rgba(245, 245, 245, 0.5) !important;
   }
   .global-alert {
-    position: absolute;
+    position: fixed;
     z-index: 999999;
     width: 40%;
   }
