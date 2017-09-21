@@ -1,5 +1,6 @@
 import Vuex from 'vuex';
-import AuthStore from '@/store/auth.store';
+import AuthState from '@/store/auth.state';
+import StoreState from '@/store/store.state';
 import { PENDING_ERROR, PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
 
 
@@ -36,7 +37,8 @@ const store = new Vuex.Store({
   actions,
   getters,
   modules: {
-    auth: AuthStore,
+    auth: AuthState,
+    store: StoreState,
   },
 });
 

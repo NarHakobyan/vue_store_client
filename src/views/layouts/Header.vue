@@ -6,9 +6,9 @@
     <router-link class="navbar-brand" to="/">Koa Vue</router-link>
     <div class="collapse navbar-collapse" :class="{show: showDropDown}">
       <ul class="navbar-nav mr-auto">
-        <li v-if="isLoggedIn" class="nav-item active">
-          <router-link class="nav-link" to="/stores">Stores</router-link>
-        </li>
+        <router-link class="nav-item" tag="li" to="/stores" exact activeClass="active">
+          <a class="nav-link" >Stores</a>
+        </router-link>
       </ul>
       <ul class="navbar-nav">
         <router-link class="nav-item" tag="li" to="/" exact activeClass="active">
