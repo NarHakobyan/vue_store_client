@@ -15,7 +15,6 @@ sync(store, router);
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
 const app = new Vue({
   el: '#app',
   router,

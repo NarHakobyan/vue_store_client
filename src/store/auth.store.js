@@ -1,4 +1,3 @@
-import router from '@/router';
 import { PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
 import User from '@/resources/User';
 import Auth from '@/resources/Auth';
@@ -22,21 +21,19 @@ const mutations = {
 
 const actions = {
   async login({ commit }, credentials) {
-    console.log(credentials);
-    commit(PENDING_START); // show spinner
+    commit(PENDING_START);
     const response = await Auth.login(credentials);
     const resObject = await response.json();
-    console.log(resObject);
     localStorage.setItem('token', resObject.data.token);
     localStorage.setItem('user', JSON.stringify(resObject.data.user));
-    commit(PENDING_SUCCESS, resObject.data.user);
-    commit(LOGIN_SUCCESS);
+    commit(PENDING_SUCCESS);
+    commit(LOGIN_SUCCESS, resObject.data.user);
     return response;
   },
   logout({ commit }) {
     localStorage.clear();
     commit(LOGOUT);
-    router.push('/login');
+    return Promise.resolve();
   },
   register({ commit }, credentials) {
     commit(PENDING_START);

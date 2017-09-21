@@ -5,23 +5,28 @@ import Login from '@/views/Login';
 import Register from '@/views/Register';
 import Store from '@/views/Store';
 
-import store from '../store';
+import store from '@/store';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     { path: '/', component: Home },
     { path: '/login', component: Login },
     { path: '/register', component: Register },
-    { path: '/stores',
-      component: Store,
-      beforeEnter(to, from, next) {
-        if (store.getters.isLoggedIn) {
-          next();
-        }
-      },
-    },
+    { path: '/stores', component: Store, meta: { requiresAuth: true } },
   ],
 });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLoggedIn) {
+      return next({
+        path: '/login',
+        query: { redirect: to.fullPath },
+      });
+    }
+  }
+  return next();
+});
+export default router;

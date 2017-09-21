@@ -28,15 +28,12 @@
       };
     },
     methods: {
-      login() {
-        this.$validator.validate().then((isValid) => {
-          console.log(this.loginForm);
-          if (isValid) {
-            this.$store.dispatch('login', this.loginForm).then(() => {
-              this.$router.push('/');
-            });
-          }
-        });
+      async login() {
+        const isValid = await this.$validator.validate();
+        if (isValid) {
+          await this.$store.dispatch('login', this.loginForm);
+          await this.$router.push(this.$route.query.redirect || '/');
+        }
       },
     },
     beforeCreate() {
