@@ -1,9 +1,7 @@
-import Vue from 'vue';
 import Vuex from 'vuex';
 import AuthStore from '@/store/auth.store';
 import { PENDING_ERROR, PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
 
-Vue.use(Vuex);
 
 const defaultState = {
   pending: false,

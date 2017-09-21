@@ -42,8 +42,9 @@
           console.log(this.regForm);
           if (isValid) {
             this.$store.dispatch('register', this.regForm).then(() => {
-              this.$router.push('/');
+              this.$router.push('/login');
             }).catch((err) => {
+              window.err = err;
               console.log(err);
             });
           }
