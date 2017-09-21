@@ -1,13 +1,16 @@
 <template>
   <div class="p-0 m-0">
+    <div class="d-flex justify-content-center">
+    <b-alert class="global-alert" variant="danger"
+             dismissible
+             :show="showDismissibleAlert"
+             @dismissed="showDismissibleAlert=false">
+      Dismissible Alert!
+    </b-alert>
+  </div>
     <app-header></app-header>
-    <div class="container-fluid align-items-center justify-content-center">
-      <b-alert variant="danger"
-               dismissible
-               :show="showDismissibleAlert"
-               @dismissed="showDismissibleAlert=false">
-        Dismissible Alert!
-      </b-alert>
+    <div class="container-fluid align-items-center justify-content-center d-flex">
+
       <router-view></router-view>
     </div>
   </div>
@@ -38,5 +41,10 @@
 
   body {
     background-color: rgba(245, 245, 245, 0.5) !important;
+  }
+  .global-alert {
+    position: absolute;
+    z-index: 999999;
+    width: 40%;
   }
 </style>

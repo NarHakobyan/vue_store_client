@@ -32,6 +32,7 @@
       }
     ],
     "no-debugger": 0,
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "no-param-reassign": 0
   }
 }
