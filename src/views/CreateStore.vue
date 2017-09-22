@@ -1,49 +1,39 @@
 <template>
   <div class="login-page">
     <div class="form">
-      <form @submit.prevent="login()">
-        <span class="text-danger" v-if="errors.firstByRule('email', 'required')">Email is required</span>
-        <input type="text" v-model="loginForm.email" v-validate="'required'" placeholder="email" name="email"/>
-        <span class="text-danger" v-if="errors.firstByRule('password', 'required')">Password is required</span>
-        <input type="password" v-model="loginForm.password" v-validate="'required'" placeholder="password" name="password"/>
-        <button>login</button>
-        <p class="message">Not registered?
-          <router-link to="/register">Create an account</router-link>
-        </p>
+      <h3 class="text-capitalize">create store</h3>
+      <form class="form-inline" @submit.prevent="createStore()">
+        <span class="text-danger" v-if="errors.firstByRule('name', 'required')">Name is required</span>
+        <input type="text" v-model="createStoreForm.name" v-validate="'required'" name="name" placeholder="Name"/>
+        <label class="form-check-label w-100 align-items-baseline px-1">
+          is store public?
+          <input style=" margin-left: auto; width: auto; " class="form-check-input" v-model="createStoreForm.public" type="checkbox">
+        </label>
+        <input type="file" id="file">
+        <button type="submit">create</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-  import errorHandler from '@/common/handler';
-
   export default {
     data() {
       return {
-        loginForm: {
-          email: '',
-          password: '',
-
+        createStoreForm: {
+          name: '',
+          public: true,
         },
       };
     },
     methods: {
-      async login() {
+      async createStore() {
         const isValid = await this.$validator.validate();
         if (isValid) {
-          try {
-            await this.$store.dispatch('login', this.loginForm);
-          } catch (e) {
-            errorHandler(e);
-            return;
-          }
-          await this.$router.push(this.$route.query.redirect || '/');
+          await this.$store.dispatch('createStore', this.createStoreForm);
+          this.$router.push({ name: 'stores' });
         }
       },
-    },
-    beforeCreate() {
-      this.$store.dispatch('logout');
     },
   };
 </script>

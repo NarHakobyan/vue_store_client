@@ -7,13 +7,16 @@ import router from '@/router';
 import store from '@/store';
 
 import 'bootstrap/scss/bootstrap.scss';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import App from './App';
 
 sync(store, router);
 
 Vue.config.productionTip = false;
+
+Vue.config.errorHandler = () => {
+  console.log('Caught an error');
+};
 
 const app = new Vue({
   el: '#app',

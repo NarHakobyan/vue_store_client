@@ -26,7 +26,6 @@
     },
     async created() {
       await this.$store.dispatch('getStores');
-      console.log(this);
     },
   };
 </script>

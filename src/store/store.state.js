@@ -1,5 +1,5 @@
-import { PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
 import { CLEAR_STORE, CLEAR_STORE_ADMINS, CLEAR_STORES, DELETE_STORE, SET_STORE, SET_STORE_ADMINS, SET_STORES } from '@/store/types/store.types';
+import { PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
 import Store from '@/resources/Store';
 
 const defaultState = {
@@ -53,6 +53,13 @@ const actions = {
     const resObject = await response.json();
     commit(PENDING_SUCCESS);
     commit(SET_STORE, resObject.data);
+    return response;
+  },
+  async createStore({ commit }, data) {
+    commit(PENDING_START);
+    const response = await Store.save(data);
+    await response.json();
+    commit(PENDING_SUCCESS);
     return response;
   },
   async deleteStore({ commit }, storeId) {
