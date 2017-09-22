@@ -49,4 +49,17 @@
     z-index: 999999;
     width: 40%;
   }
+  .flex-row  {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @media only screen and (max-width : 480px){
+    .flex-row > [class*='col-'] {
+      width: 100%;
+    }
+    .flex-row  {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+  }
 </style>

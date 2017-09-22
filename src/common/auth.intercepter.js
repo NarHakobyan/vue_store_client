@@ -23,7 +23,7 @@ const AuthResponseInterceptor = async (response) => {
       });
       break;
     default:
-      store.commit(PENDING_ERROR, [{ message: 'Something went wrong' }]);
+      store.commit(PENDING_ERROR, [{ message: resObj.message || 'Something went wrong' }]);
   }
   return response;
 };

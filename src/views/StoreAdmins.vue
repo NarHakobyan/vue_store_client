@@ -1,32 +1,25 @@
 <template>
   <div class="container">
-    <div class="flex-row row">
-      <store-card v-for="store in stores" :key="store._id" :store="store">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. asdfasdfasdfsdfa asdfasdf sdfasfasdfasfasdfasdfasdfsd asdf asdf Distinctio, evenietsdf sdfsdfsdfsdfsdfsdf.
-      </store-card>
+    <div class="flex-row row" v-if="storeAdmins">
+      <admin-card v-for="admin in storeAdmins" :key="admin._id" :user="admin"></admin-card>
     </div>
-    {{allStoresCount}}
-    {{filteredStoresCount}}
   </div>
 
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
-  import StoreCard from '@/components/StoreCard';
+  import AdminCard from '@/components/AdminCard';
 
   export default {
-    components: { StoreCard },
+    components: { AdminCard },
     computed: {
       ...mapGetters([
-        'stores',
-        'allStoresCount',
-        'filteredStoresCount',
+        'storeAdmins',
       ]),
     },
     async created() {
-      await this.$store.dispatch('getStores');
-      console.log(this);
+      await this.$store.dispatch('getStoreAdmins', this.$route.params.storeId);
     },
   };
 </script>

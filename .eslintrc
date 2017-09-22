@@ -33,6 +33,7 @@
     ],
     "no-debugger": 0,
     "semi": ["error", "always"],
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+    "dot-notation": ["error", { "allowPattern": "^_.+$" }]
   }
 }

@@ -1,8 +1,7 @@
 import Vuex from 'vuex';
 import AuthState from '@/store/auth.state';
 import StoreState from '@/store/store.state';
-import { PENDING_ERROR, PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
-
+import { CLEAR_PENDING_ERROR, PENDING_ERROR, PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
 
 const defaultState = {
   pending: false,
@@ -22,9 +21,15 @@ const mutations = {
   [PENDING_ERROR](state, errors) {
     state.errors = errors;
   },
+  [CLEAR_PENDING_ERROR](state) {
+    state.errors = null;
+  },
 };
 
 const actions = {
+  clearPendingErrors({ commit }) {
+    commit(CLEAR_PENDING_ERROR);
+  },
 };
 const getters = {
   hasError: state => state.errors !== null,

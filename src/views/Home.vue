@@ -1,7 +1,7 @@
 <template>
-  <div class="page">
+  <div>
     <p>
-      To get started, edit files in <code>./client</code> and save.
+      I have started learn vue with Koa
     </p>
   </div>
 </template>
