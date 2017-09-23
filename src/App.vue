@@ -1,22 +1,29 @@
 <template>
   <div class="p-0 m-0">
     <div class="d-flex justify-content-center">
-      <!--<b-alert class="global-alert" variant="danger"
-               :show="hasError">
-        {{pendingErrors}}
-      </b-alert>-->
       <notifications position="bottom right"/>
     </div>
     <app-header></app-header>
     <div class="container-fluid align-items-center justify-content-center d-flex">
       <router-view></router-view>
     </div>
+    <sweet-modal ref="modal" :icon="modal.icon" :overlay-theme="modal.theme" :modal-theme="modal.theme">
+      {{modal.message}}
+      <hr>
+      <div class="float-right" v-if="modal.confirm">
+        <a @click="modal.confirmAction" class="btn btn-lg text-white btn-primary">Yes</a>
+        <a @click="modal.failAction" class="btn btn-lg text-white btn-danger">No</a>
+      </div>
+    </sweet-modal>
   </div>
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex';
+  import { SweetModal } from 'sweet-modal-vue';
+  import SweetButton from 'sweet-modal-vue/docs/components/Button';
+
   import appHeader from '@/views/layouts/Header';
-  import { mapGetters } from 'vuex';
 
   export default {
     data() {
@@ -26,15 +33,24 @@
     },
     components: {
       appHeader,
+      SweetModal,
+      SweetButton,
     },
     computed: {
       ...mapGetters([
         'hasError',
         'pendingErrors',
+        'confirmMessage',
+        'modal',
+      ]),
+    },
+    methods: {
+      ...mapActions([
+        'setModalRef',
       ]),
     },
     mounted() {
-//      Notify.setVueInstace(this.$notify);
+      this.setModalRef(this.$refs.modal);
     },
   };
 </script>
@@ -65,5 +81,9 @@
       padding-left: 0px;
       padding-right: 0px;
     }
+  }
+
+  btn {
+    color: #fff;
   }
 </style>

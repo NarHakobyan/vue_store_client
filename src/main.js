@@ -14,9 +14,6 @@ sync(store, router);
 
 Vue.config.productionTip = false;
 
-Vue.config.errorHandler = () => {
-  console.log('Caught an error');
-};
 
 const app = new Vue({
   el: '#app',

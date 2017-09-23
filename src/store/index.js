@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import AuthState from '@/store/auth.state';
 import StoreState from '@/store/store.state';
+import ModalState from '@/store/modal.state';
 import { CLEAR_PENDING, PENDING_ERROR, PENDING_START, PENDING_SUCCESS } from '@/store/types/pending.types';
 
 const defaultState = {
@@ -46,6 +47,7 @@ const store = new Vuex.Store({
   modules: {
     auth: AuthState,
     store: StoreState,
+    modal: ModalState,
   },
 });
 

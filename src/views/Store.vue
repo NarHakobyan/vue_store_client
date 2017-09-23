@@ -24,6 +24,7 @@
         'filteredStoresCount',
       ]),
     },
+    methods: {},
     async created() {
       await this.$store.dispatch('getStores');
     },

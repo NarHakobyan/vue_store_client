@@ -8,7 +8,7 @@
         </p>
         <p>
           <router-link class="btn btn-primary" :to="{ name: 'singleStore', params: { storeId: store['_id'] }}">Info</router-link>
-          <a class="btn btn-danger float-right" @click="deleteStore(store['_id'])">Delete</a>
+          <button class="btn btn-danger float-right" @click="handleDelete(store['_id'])">Delete</button>
         </p>
       </div>
     </div>
@@ -26,7 +26,16 @@
     methods: {
       ...mapActions([
         'deleteStore',
+        'showConfirmModal',
       ]),
+      handleDelete(id) {
+        this.showConfirmModal({
+          message: 'working',
+          confirmAction: () => {
+            this.deleteStore(id);
+          },
+        });
+      },
     },
   };
 </script>
