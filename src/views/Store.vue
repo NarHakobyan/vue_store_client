@@ -4,9 +4,10 @@
       <store-card v-for="store in stores" :key="store._id" :store="store">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. asdfasdfasdfsdfa asdfasdf sdfasfasdfasfasdfasdfasdfsd asdf asdf Distinctio, evenietsdf sdfsdfsdfsdfsdfsdf.
       </store-card>
+      <h2 v-if="stores.length === 0">Store list is empty</h2>
     </div>
-    {{allStoresCount}}
-    {{filteredStoresCount}}
+    <!--    {{allStoresCount}}
+        {{filteredStoresCount}}-->
   </div>
 
 </template>

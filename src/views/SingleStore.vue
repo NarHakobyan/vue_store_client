@@ -6,7 +6,7 @@
       <div class="card-block">
         <h4 class="card-title">{{store.name}}</h4>
         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-        <router-link class="btn btn-primary" :to="{ name: 'storeAdmins', params: { storeId: store['_id'] }}">Info</router-link>
+        <router-link class="btn btn-primary" :to="{ name: 'storeAdmins', params: { storeId: store['_id'] }}">Admins</router-link>
       </div>
     </div>
   </div>
