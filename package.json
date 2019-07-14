@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "lodash.startcase": "^4.4.0",
     "sweet-modal-vue": "^1.2.0",
     "vee-validate": "^2.0.0-rc.17",
